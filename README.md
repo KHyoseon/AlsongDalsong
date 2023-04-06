@@ -80,7 +80,7 @@ SSAFY 7기 특화 빅데이터 추천 프로젝트
 
 ## API 명세서
 
-![API 명세서 노션 페이지](https://hyoseon-kim.notion.site/API-9610c1607e554970b6564b3b9765818d)
+[API 명세서 노션 페이지](https://hyoseon-kim.notion.site/API-9610c1607e554970b6564b3b9765818d)
 
 </br>
 
