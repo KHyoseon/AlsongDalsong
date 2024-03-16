@@ -88,7 +88,7 @@ class UserStickerDetail(GenericAPIView):
 
         try:
             # 이미 구매한 스티커 팩인지 체크
-            sticker = UserSticker.objects.get(sticker_pack=stickerPack_pk, user=user_id)
+            sticker = UserSticker.objects.select_for_update(nowait=False).get(sticker_pack=stickerPack_pk, user=user_id)
         except:
             # 구매한 적 없음 (구매 성공)
             data = {'sticker_pack': stickerPack_pk, 'user': user_id}
