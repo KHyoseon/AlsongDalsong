@@ -11,6 +11,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from rest_framework.decorators import api_view
+import threading
 
 # Create your views here.
 
@@ -107,8 +108,14 @@ class UserStickerDetail(GenericAPIView):
 
 @api_view(['POST',])
 def KakaoPay(request,user_id):
-    user = get_object_or_404(User, id=user_id)
     charge = request.POST.get('charge')
-    user.point += int(charge)
-    user.save()
+    try:
+        user = get_object_or_404(User, id=user_id)
+        lock = threading.Lock()
+        lock.acquire()
+        user.point += int(charge)
+        user.save()
+        lock.release()
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
     return Response(status=status.HTTP_200_OK)
